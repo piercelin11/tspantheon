@@ -1,0 +1,66 @@
+<%- include( "partials/header.ejs" ) %>
+
+<main>
+
+    <div class="main">
+        <h1>Songs Ranking</h1>
+
+        <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
+        <div class="date-menu">
+            <% for (let dates of allDates) {%>               
+                <button class="date">
+                    <a href="/songs-ranking/<%= dates.id %>"><%= dates.date %></a> 
+                </button>
+            <% } %> 
+        </div>
+        
+        <!-- 排名的日期與資訊 -->
+        <div class="ranking-header">
+            <% if (locals.currentDate) {%>
+                <p><%= currentDate.date %></p>
+                <p class="gray-text"><%= currentDate.info %></p>
+            <% } else { %>
+                <p><%= allDates[0].date %></p>
+                <p class="gray-text"><%= allDates[0].info %></p>
+            <% } %>
+        </div>
+        
+        <!-- 排名，用迴圈從資料庫中讀取資料 -->
+        <% for (let songChartData of chartData) { %>
+            <div class="ranking-box">
+                <div>
+                    <span class="ranking-number">#<%= songChartData.currentRanking %></span> <!-- 當前排名 -->
+                    <img src="/album-covers/<%= songChartData.albumName.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <div class="song-info">
+                        <h2 class="song-info"><%= songChartData.songName %></h2> <!-- 歌曲名 -->
+                        <p class="gray-text song-info"><%= songChartData.albumName %></p> <!-- 專輯名 -->
+                    </div>
+                </div>
+                <div>
+                    <p class="peak"><%= songChartData.peak %></p> <!-- 最高排名 -->
+                    <p class="last-ranking"><%= songChartData.lastRanking %></p> <!-- 上次排名 -->
+                    <% if (songChartData.difference !== "" && songChartData.difference !== 0) { %>
+                        <div>
+                            <img class="icon" src="/icons/<%= songChartData.difference > 0 ? 'up' : 'down' %>.svg" alt="arrow icon" >
+                            <p><%= Math.abs(songChartData.difference) %></p>
+                        </div> <!-- 排名變化 -->
+                    <% } else { %>
+                        <div>
+                            <img class="icon" src="/icons/<%= songChartData.lastRanking !== "" ? 'right' : 'debut' %>.svg" alt="arrow icon" >
+                            <p><%= songChartData.lastRanking !== "" ? Math.abs(songChartData.difference) : "" %></p>
+                        </div> <!-- 排名變化 -->
+                    <% } %>
+                    
+                    <button class="info-icon">
+                        <img class="icon" src="/icons/info.svg" alt="info icon">
+                    </button> <!-- 資訊按鈕 -->
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+
+</main>
+
+</body>
+</html> 

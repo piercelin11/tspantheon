@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-3269,-2767)">
+        <g transform="matrix(0.771329,0,0,0.771329,747.229,632.661)">
+            <rect id="画板2" x="3269.38" y="2767.09" width="648.232" height="648.232" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect id="画板21" serif:id="画板2" x="3269.38" y="2767.09" width="648.232" height="648.232"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(1.29646,0,0,1.29646,-968.755,-820.222)">
+                    <path d="M3519,2767C3656.98,2767 3769,2879.02 3769,3017C3769,3154.98 3656.98,3267 3519,3267C3381.02,3267 3269,3154.98 3269,3017C3269,2879.02 3381.02,2767 3519,2767ZM3550.76,2967.3L3487.24,2967.3L3487.24,3168.7L3550.76,3168.7L3550.76,2967.3ZM3480.73,2901.66C3480.73,2911.43 3484.29,2919.97 3491.54,2927.21C3498.67,2934.34 3507.67,2938.02 3518.62,2938.02C3529.4,2938.02 3538.43,2934.57 3545.79,2927.88C3553.43,2920.91 3557.27,2912.18 3557.27,2901.66C3557.27,2891.14 3553.43,2882.41 3545.79,2875.45C3538.43,2868.75 3529.4,2865.3 3518.62,2865.3C3507.67,2865.3 3498.67,2868.98 3491.54,2876.11C3484.29,2883.36 3480.73,2891.89 3480.73,2901.66Z" style="fill:rgb(85,85,85);"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

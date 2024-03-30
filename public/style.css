@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    font-family: poppins,  sans-serif;
+  }
+
+main {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* 主內容佔滿剩餘空間 */
+    background-color: #212121;
+    padding:80px 100px;
+    color: #fff;
+}
+
+.main {
+    flex: 1;
+    max-width: 1000px;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+p{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+a {
+    color: white; /* 設置連結文字顏色為白色 */
+    text-decoration: none; /* 去掉連結底線 */
+}
+
+.gray-text{
+    font-weight: 400;
+    font-size: 16px;
+    color: #454545;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 400; 
+}
+  
+.sidebar {
+    min-width: 150px; /* 側邊欄寬度 */
+    background-color: #171717; /* 側邊欄背景色 */
+    padding: 80px 50px;
+}
+
+.sidebar > ul {
+    list-style-type: none;
+}
+  
+button.date {
+    border: none;
+    background-color: #171717;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 50px;
+}
+
+.icon {
+    width: 22px;
+}
+
+.date-menu {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 40px;
+}
+
+ /* 排名相關的 */
+.ranking-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #171717;
+    padding: 12px 50px 12px 30px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.ranking-header{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.ranking-header > p {
+    font-size: 15px;
+}
+
+.ranking-box > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 1;
+    overflow: hidden;
+}
+
+.ranking-box > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    flex-basis: 300px;
+}
+
+.ranking-box > div:last-child div {
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+}
+
+.ranking-number {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.ranking-box > div:last-child  p {
+    font-weight: 400;
+}
+
+.ranking-box > div:last-child > p:first-child {
+    margin-right: 15px;
+}
+
+.ranking-cover{
+    display: inline-block;
+    object-fit: cover;
+    width: 75px;
+    margin-left: 5px;
+}
+
+.song-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* RWD */
+@media screen and (max-width: 1023px) {
+    .sidebar, .peak, .last-ranking, .info-icon {
+      display: none;
+    }
+
+    .ranking-box > div:last-child {
+        justify-content: flex-end;
+        flex-basis: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    main {
+        padding: 80px 0px;
+    }
+
+    .main {
+        max-width: 85vw;
+    }
+
+    .ranking-number {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    h2{
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    p{
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .ranking-cover{
+        width: 60px;
+    }
+}
+
