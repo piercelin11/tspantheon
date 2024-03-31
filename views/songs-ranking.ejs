@@ -30,25 +30,26 @@
                         <% if ( locals.isCurrent) { %>
                             <p class="chart-info-hidden">peak</p> <!-- 最高排名 -->
                             <p class="chart-info-hidden">last ranking</p> <!-- 上次排名 -->
-                        <% } %>                        
+                        <% } %> 
+                        <p class="chart-info-hidden">award</p> <!-- 獎座 -->                       
                     </div>                   
                 </div>
             </div>
-        
-        
+            
+
         <!-- 排名，用迴圈從資料庫中讀取資料 -->
-        <% for (let songChartData of chartData) { %>
+        <% for (let songChartData of chartData) { %> 
             <div class="ranking-box">
                 <div>
-                    <span class="ranking-number">#<%= songChartData.currentRanking %></span> <!-- 當前排名 -->
-                    <% if (songChartData.difference !== "" && songChartData.difference !== 0) { %>
+                    <span class="ranking-number" <% if ( parseInt(songChartData.currentRanking) >= 100 ) { %> style="font-size: 20px" <% } %>>#<%= songChartData.currentRanking %></span> <!-- 當前排名 -->
+                    <% if (songChartData.difference !== "" && songChartData.difference !== 0 && !isNaN(songChartData.difference)) { %>
                         <div class="rank-difference">
                             <img class="icon" src="/icons/<%= songChartData.difference > 0 ? 'up' : 'down' %>.svg" alt="arrow icon" >
-                            <p><%= Math.abs(songChartData.difference) %></p>
+                            <p class="chart-info-hidden"><%= Math.abs(songChartData.difference) %></p>
                         </div> <!-- 排名變化 -->
                     <% } else { %>
                         <div class="rank-difference">
-                            <img class="icon" src="/icons/<%= songChartData.lastRanking !== "" ? 'right' : 'debut' %>.svg" alt="arrow icon" >
+                            <img class="icon" src="/icons/<%= songChartData.lastRanking === "" ? 'debut' : 'right' %>.svg" alt="arrow icon" >
                             <p><%= songChartData.lastRanking !== "" ? Math.abs(songChartData.difference) : "" %></p>
                         </div> <!-- 排名變化 -->
                     <% } %>
@@ -59,11 +60,19 @@
                     </div>
                 </div>
                 <div>
-                    <p class="chart-info-hidden"><%= songChartData.peak %></p> <!-- 最高排名 -->
+                    <p class="chart-info-hidden"><%= locals.isCurrent ? songChartData.peak : "" %></p> <!-- 最高排名 -->
                     <p class="chart-info-hidden"><%= songChartData.lastRanking %></p> <!-- 上次排名 -->
-                    
+                    <div class="chart-award">
+                        <% if ( songChartData.currentRanking ===  songChartData.peak ) { %>
+                            <img class="icon" src="/icons/peak.svg" alt="award-icon">
+                        <% } if ( parseInt(songChartData.difference) >= 30 ) { %>
+                            <img class="icon" src="/icons/big-climb.svg" alt="award-icon"> 
+                        <% } else if ( parseInt(songChartData.difference) <= -30 ) { %>
+                            <img class="icon" src="/icons/big-drop.svg" alt="award-icon">
+                        <% } %>
+                    </div>
                     <button class="info-button">
-                        <img class="icon" src="/icons/info.svg" alt="info icon">
+                        <img class="icon" src="/icons/info.svg" alt="info-icon">
                     </button> <!-- 資訊按鈕 -->
                 </div>
             </div>

@@ -28,17 +28,17 @@
                     </div>                   
                 </div>
             </div>
-        
-        
+            
+                   
         <!-- 排名，用迴圈從資料庫中讀取資料 -->
         <% for (let songAverageChartData of averageChartData) { %>
             <div class="ranking-box">
-                <div>
-                    <span class="ranking-number">#<%= songAverageChartData.ranking %></span> <!-- 當前排名 -->
-                    <% if (songAverageChartData.last_average_ranking !== "") { %>
+                <div> 
+                    <span class="ranking-number" <% if ( parseInt(songAverageChartData.ranking) >= 100 ) { %> style="font-size: 20px" <% } %>>#<%= songAverageChartData.ranking %></span> <!-- 當前排名 -->
+                    <% if (songAverageChartData.last_average_ranking !== null) { %>
                         <div class="rank-difference">
                             <img class="icon" src="/icons/<%= songAverageChartData.last_average_ranking - songAverageChartData.ranking > 0 ? 'up' : songAverageChartData.last_average_ranking - songAverageChartData.ranking < 0 ? 'down' : 'right' %>.svg" alt="arrow icon" >
-                            <p><%= Math.abs(songAverageChartData.last_average_ranking - songAverageChartData.ranking) %></p>
+                            <p class="chart-info-hidden"><%= Math.abs(songAverageChartData.last_average_ranking - songAverageChartData.ranking) %></p>
                         </div> <!-- 排名變化 -->
                     <% } else { %>
                         <div class="rank-difference">

@@ -1,0 +1,70 @@
+<%- include( "partials/header.ejs" ) %>
+
+<main>
+
+    <div class="main">
+        <h1>Album Ranking</h1>
+
+        <!-- 選單 -->
+        <div class="chart-menu">                        
+            <button class="rounded">
+                <a href="">Taylor Swift</a> 
+            </button>  
+            <button class="rounded">
+                <a href="">Fearless</a> 
+            </button>     
+        </div>
+        
+        <!-- 小標題 -->
+            <div class="ranking-header">
+                <div>
+                    <p>TS Pantheon</p>
+                    <p class="gray-text text-overflow">Chart of all time</p>
+                </div>
+                <div>
+                    <div>
+                        <p class="chart-info-hidden">peak</p> <!-- 最高排名 -->
+                        <p class="chart-info-hidden">points</p> <!-- 排名前十次數 -->                       
+                    </div>                   
+                </div>
+            </div>
+        
+        
+        <!-- 排名，用迴圈從資料庫中讀取資料 -->
+        <% for (let albumChartData of chartData) { %>
+            <div class="ranking-box">
+                <div>
+                    <span class="ranking-number">#<%= albumChartData.ranking %></span> <!-- 當前排名 -->
+                    <% if (albumChartData.total_last_points !== null) { %>
+                        <div class="rank-difference">
+                            <img class="icon" src="/icons/<%= albumChartData.last_ranking - albumChartData.ranking > 0 ? 'up' : albumChartData.last_ranking - albumChartData.ranking < 0 ? 'down' : 'right' %>.svg" alt="arrow icon" >
+                            <p class="chart-info-hidden"><%= Math.abs(albumChartData.last_ranking - albumChartData.ranking) %></p>
+                        </div> <!-- 排名變化 -->
+                    <% } else { %>
+                        <div class="rank-difference">
+                            <img class="icon" src="/icons/debut.svg" alt="arrow icon" >
+                        </div> <!-- 排名變化 -->
+                    <% } %>
+                    <img src="/album-covers/<%= albumChartData.album_name.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <div class="text-overflow">
+                        <h2 class="text-overflow"><%= albumChartData.album_name %></h2> <!-- 歌曲名 -->
+                        <p class="gray-text text-overflow">some info</p> <!-- 專輯名 -->
+                    </div>
+                </div>
+                <div>
+                    <p class="chart-info-hidden"><%= albumChartData.songs_average_ranking %></p> <!-- 最高排名 -->
+                    <p class="chart-info-hidden"><%= albumChartData.total_points %></p> <!-- 上次排名 -->
+                    
+                    <button class="info-button">
+                        <img class="icon" src="/icons/info.svg" alt="info icon">
+                    </button> <!-- 資訊按鈕 -->
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+
+</main>
+
+</body>
+</html> 

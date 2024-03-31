@@ -16,7 +16,7 @@ main {
     justify-content: center;
     flex: 1; /* 主內容佔滿剩餘空間 */
     background-color: #212121;
-    padding:80px 100px;
+    padding: 80px 0px;
     color: #fff;
 }
 
@@ -95,13 +95,13 @@ button.rounded {
     justify-content: space-between;
     gap: 20px;
     background-color: #171717;
-    padding: 12px 80px 12px 30px;
+    padding: 12px 45px 12px 30px;
     border-radius: 10px;
     margin-bottom: 5px;
 }
 
 .ranking-number {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     min-width: 60px;
 }
@@ -110,8 +110,7 @@ button.rounded {
     display: flex;
     align-items: center;
     gap: 5px;
-    flex-grow: 1;
-    flex-shrink: 1;
+    flex: 1;
     overflow: hidden;
 }
 
@@ -119,29 +118,38 @@ button.rounded {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 80px;
+    gap: 50px;
     flex-shrink: 0;
     flex-basis: 150px;
 }
 
 .ranking-box > div:last-child  p {
-    min-width: 20px;
+    min-width: 60px;
     text-align: center;
     font-weight: 400;
+}
+
+.chart-award {
+    display: flex;
+    min-width: 60px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px
 }
 
 .ranking-cover {
     display: inline-block;
     object-fit: cover;
     width: 75px;
-    margin-left: 5px;
+    margin: 0px 8px;
 }
 
 .rank-difference {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
-    flex-basis: 40px;
+    min-width: 55px;
     flex-shrink: 0;
 }
 
@@ -160,7 +168,7 @@ button.rounded {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 12px 40px 12px 10px;
+    padding: 12px 25px 12px 10px;
     border-radius: 10px;
     margin-bottom: 5px;
 }
@@ -176,13 +184,13 @@ button.rounded {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 80px;
     flex-shrink: 0;
     flex-basis: 150px;
 }
 
 .ranking-header > div:last-child div {
     display: flex;
+    gap: 10px;
     align-items: center;
 }
 
@@ -199,41 +207,58 @@ button.rounded {
 
 /* RWD */
 @media screen and (max-width: 1023px) {
+    main {
+        padding: 80px 0px;
+    }
+
+    .main{
+        max-width: 80vw;
+    }
+    
     .sidebar, .chart-info-hidden, .ranking-header > div:last-child {
-      display: none;
+        display: none;
     }
 
     .info-button {
         display: block;
     }
 
-    .ranking-box > div:last-child {
-        justify-content: flex-end;
-        flex-basis: auto;
+    .ranking-box{
+        padding: 10px 40px 10px 30px;
     }
 
-    .ranking-box{
-        padding: 12px 40px 12px 30px;
+    .ranking-box > div:last-child {
+        gap: 20px;
+        flex-shrink: 1;
     }
+
+    .rank-difference {
+        min-width: 35px;
+    }
+
+    .ranking-number {
+        min-width: 50px;
+    }
+
 }
 
 @media screen and (max-width: 767px) {
-    main {
-        padding: 80px 0px;
-    }
 
     .main {
         max-width: 85vw;
     }
 
-    .ranking-number {
-        min-width: 40px;
-        font-size: 20px;
-    }
-    
-    .gray-text{
+    h2{
         font-size: 14px;
     }
+
+    .gray-text{
+        font-size: 12px;
+    }
+
+    .ranking-number {
+        font-size: 20px;
+    }   
     
     p{
         font-size: 14px;
