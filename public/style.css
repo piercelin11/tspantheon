@@ -27,8 +27,8 @@ main {
 
 h1 {
     font-weight: 600;
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 15px;
 }
 
 h2{
@@ -70,7 +70,7 @@ button {
     list-style-type: none;
 }
   
-button.date {
+button.rounded {
     border: none;
     background-color: #171717;
     color: #fff;
@@ -82,7 +82,7 @@ button.date {
     width: 22px;
 }
 
-.date-menu {
+.chart-menu {
     display: flex;
     gap: 5px;
     margin-bottom: 40px;
@@ -95,26 +95,22 @@ button.date {
     justify-content: space-between;
     gap: 20px;
     background-color: #171717;
-    padding: 12px 50px 12px 30px;
+    padding: 12px 80px 12px 30px;
     border-radius: 10px;
     margin-bottom: 5px;
 }
 
-.ranking-header{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 10px;
-}
-
-.ranking-header > p {
-    font-size: 15px;
+.ranking-number {
+    font-size: 28px;
+    font-weight: 700;
+    min-width: 60px;
 }
 
 .ranking-box > div:first-child {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
+    flex-grow: 1;
     flex-shrink: 1;
     overflow: hidden;
 }
@@ -122,52 +118,102 @@ button.date {
 .ranking-box > div:last-child {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 80px;
     flex-shrink: 0;
-    flex-basis: 300px;
-}
-
-.ranking-box > div:last-child div {
-    display: flex;
-    align-items: center;
-    gap: 7.5px;
-}
-
-.ranking-number {
-    font-size: 24px;
-    font-weight: 700;
+    flex-basis: 150px;
 }
 
 .ranking-box > div:last-child  p {
+    min-width: 20px;
+    text-align: center;
     font-weight: 400;
 }
 
-.ranking-box > div:last-child > p:first-child {
-    margin-right: 15px;
-}
-
-.ranking-cover{
+.ranking-cover {
     display: inline-block;
     object-fit: cover;
     width: 75px;
     margin-left: 5px;
 }
 
-.song-info {
+.rank-difference {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-basis: 40px;
+    flex-shrink: 0;
+}
+
+.rank-difference > p {
+    font-weight: 300;
+}
+
+.text-overflow {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.ranking-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 40px 12px 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.ranking-header > div:first-child {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    gap: 20px;
+}
+
+.ranking-header > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 80px;
+    flex-shrink: 0;
+    flex-basis: 150px;
+}
+
+.ranking-header > div:last-child div {
+    display: flex;
+    align-items: center;
+}
+
+.ranking-header > div:last-child  p {
+    min-width: 100px;
+    text-align: center;
+    font-weight: 400;
+    color: #454545;
+}
+
+.info-button {
+    display: none;
+}
+
 /* RWD */
 @media screen and (max-width: 1023px) {
-    .sidebar, .peak, .last-ranking, .info-icon {
+    .sidebar, .chart-info-hidden, .ranking-header > div:last-child {
       display: none;
+    }
+
+    .info-button {
+        display: block;
     }
 
     .ranking-box > div:last-child {
         justify-content: flex-end;
         flex-basis: auto;
+    }
+
+    .ranking-box{
+        padding: 12px 40px 12px 30px;
     }
 }
 
@@ -181,27 +227,23 @@ button.date {
     }
 
     .ranking-number {
+        min-width: 40px;
         font-size: 20px;
     }
-
-    h1 {
-        font-weight: 600;
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
     
-    h2{
-        font-weight: 600;
+    .gray-text{
         font-size: 14px;
     }
     
     p{
-        font-weight: 600;
         font-size: 14px;
     }
 
     .ranking-cover{
         width: 60px;
     }
-}
 
+    .ranking-box{
+        padding: 12px 30px 12px 20px;
+    }
+}
