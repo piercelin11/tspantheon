@@ -3,7 +3,7 @@
 <main>
 
     <div class="main">
-        <h1>Chart of All Time</h1>
+        <h1 class="chart-title">Chart of All Time</h1>
 
         <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
         <div class="chart-menu">                        
@@ -24,7 +24,8 @@
                 <div>
                     <div>
                         <p class="chart-info-hidden">peak</p> <!-- 最高排名 -->
-                        <p class="chart-info-hidden">in top ten</p> <!-- 排名前十次數 -->                       
+                        <p class="chart-info-hidden">in top ten</p> <!-- 排名前十次數 --> 
+                        <p class="chart-info-hidden">award</p> <!-- 獎座 -->                      
                     </div>                   
                 </div>
             </div>
@@ -32,7 +33,7 @@
                    
         <!-- 排名，用迴圈從資料庫中讀取資料 -->
         <% for (let songAverageChartData of averageChartData) { %>
-            <div class="ranking-box">
+            <div class="ranking-box" onclick="window.location='/songs-ranking/song/<%= songAverageChartData.id %>'">
                 <div> 
                     <span class="ranking-number" <% if ( parseInt(songAverageChartData.ranking) >= 100 ) { %> style="font-size: 20px" <% } %>>#<%= songAverageChartData.ranking %></span> <!-- 當前排名 -->
                     <% if (songAverageChartData.last_average_ranking !== null) { %>
@@ -45,16 +46,24 @@
                             <img class="icon" src="/icons/debut.svg" alt="arrow icon" >
                         </div> <!-- 排名變化 -->
                     <% } %>
-                    <img src="/album-covers/<%= songAverageChartData.album_name.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <img src="/album-covers/<%= songAverageChartData.song_name === "I Heart?" ? "beautiful eyes" : songAverageChartData.album_name === "Single" ? songAverageChartData.song_name.toLowerCase() : songAverageChartData.album_name.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
                     <div class="text-overflow">
-                        <h2 class="text-overflow"><%= songAverageChartData.song_name %></h2> <!-- 歌曲名 -->
-                        <p class="gray-text text-overflow"><%= songAverageChartData.album_name %></p> <!-- 專輯名 -->
+                        <p class="text-overflow wb-text"><%= songAverageChartData.song_name %></p> <!-- 歌曲名 -->
+                        <p class="gray-text info-text text-overflow"><%= songAverageChartData.album_name %></p> <!-- 專輯名 -->
                     </div>
                 </div>
                 <div>
                     <p class="chart-info-hidden"><%= songAverageChartData.peak %></p> <!-- 最高排名 -->
                     <p class="chart-info-hidden"><%= songAverageChartData.times_in_top_ten %></p> <!-- 上次排名 -->
-                    
+                    <div class="chart-award">
+                        <% if ( parseInt(songAverageChartData.top_ten_award) <= 3 ) { %>
+                            <img class="icon" src="/icons/top-ten-award.svg" alt="award-icon">
+                        <% } if ( parseInt(songAverageChartData.most_difference_award) <= 3 ) { %>
+                            <img class="icon" src="/icons/unstable-award.svg" alt="award-icon"> 
+                        <% } else if ( parseInt(songAverageChartData.most_stable_award) <= 3 ) { %>
+                            <img class="icon" src="/icons/stable-award.svg" alt="award-icon">
+                        <% } %>
+                    </div>
                     <button class="info-button">
                         <img class="icon" src="/icons/info.svg" alt="info icon">
                     </button> <!-- 資訊按鈕 -->

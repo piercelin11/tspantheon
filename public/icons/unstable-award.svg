@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-2145.32,-1678.69)">
+        <g id="画板2" transform="matrix(0.307342,0,0,0.307342,1140.5,828.25)">
+            <rect x="3269.38" y="2767.09" width="648.232" height="648.232" style="fill:none;"/>
+            <g transform="matrix(7.20364e-16,14.819,-17.6194,1.359e-15,51012.6,-23258.2)">
+                <path d="M1763.75,2695C1763.75,2695 1784.8,2695 1784.8,2695L1784.8,2688.06L1797.51,2698.75L1784.8,2709.44C1784.8,2709.44 1784.8,2702.5 1784.8,2702.5L1763.75,2702.5L1763.75,2695Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(7.20364e-16,-14.819,17.6194,1.359e-15,-43825.6,29440.6)">
+                <path d="M1763.75,2695C1763.75,2695 1784.8,2695 1784.8,2695L1784.8,2688.06L1797.51,2698.75L1784.8,2709.44C1784.8,2709.44 1784.8,2702.5 1784.8,2702.5L1763.75,2702.5L1763.75,2695Z" style="fill:white;"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -15,8 +15,8 @@ main {
     display: flex;
     justify-content: center;
     flex: 1; /* 主內容佔滿剩餘空間 */
-    background-color: #212121;
-    padding: 80px 0px;
+    background-color: #191919;
+    padding: 80px 100px;
     color: #fff;
 }
 
@@ -25,15 +25,35 @@ main {
     max-width: 1000px;
 }
 
-h1 {
-    font-weight: 600;
-    font-size: 30px;
-    margin-bottom: 15px;
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-h2{
+h1 {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+h3{
     font-weight: 600;
     font-size: 16px;
+}
+
+.wb-text {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.wbl-text {
+    font-size: 24px;
+    font-weight: 500;
 }
 
 p{
@@ -48,8 +68,12 @@ a {
 
 .gray-text{
     font-weight: 400;
-    font-size: 16px;
-    color: #454545;
+    color: #525252;
+}
+
+.light-gray-text{
+    font-weight: 400;
+    color: #8e8e8e;
 }
 
 button {
@@ -62,7 +86,7 @@ button {
   
 .sidebar {
     min-width: 150px; /* 側邊欄寬度 */
-    background-color: #171717; /* 側邊欄背景色 */
+    background-color: #111111; /* 側邊欄背景色 */
     padding: 80px 50px;
 }
 
@@ -72,14 +96,14 @@ button {
   
 button.rounded {
     border: none;
-    background-color: #171717;
+    background-color: #111111;
     color: #fff;
     padding: 10px 25px;
     border-radius: 50px;
 }
 
 .icon {
-    width: 22px;
+    width: 24px;
 }
 
 .chart-menu {
@@ -89,12 +113,16 @@ button.rounded {
 }
 
  /* 排名相關的 */
+.chart-title {
+    margin-bottom: 15px;
+}
+
 .ranking-box{
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    background-color: #171717;
+    background-color: #111111;
     padding: 12px 45px 12px 30px;
     border-radius: 10px;
     margin-bottom: 5px;
@@ -205,6 +233,59 @@ button.rounded {
     display: none;
 }
 
+/* 歌曲資訊頁面 */
+.song-info-page {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center top;
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    gap: 30px; 
+    margin-bottom: 50px;
+    flex-shrink: 1;
+}
+
+.song-info p {
+    font-size: 22px;
+}
+
+
+.song-info > div > button {
+    margin-top: 10px;
+}
+
+.song-static {
+    display: flex;
+    row-gap: 40px; 
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+    flex-shrink: 1;
+    justify-content: space-between;
+}
+
+.song-static > div {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+}
+
+.song-static > div:last-child {
+    flex-grow: 1;
+}
+
+#song-line-chart {
+    margin-bottom: 80px;
+}
+
+.mobile-display-cover {
+    display: none;
+}
+
+
 /* RWD */
 @media screen and (max-width: 1023px) {
     main {
@@ -244,15 +325,27 @@ button.rounded {
 
 @media screen and (max-width: 767px) {
 
+    main.song-info-page  {
+        padding: 7.5vw 0px;
+    }
+
     .main {
         max-width: 85vw;
     }
 
-    h2{
+    .icon {
+        width: 22px;
+    }
+
+    .wb-text{
         font-size: 14px;
     }
 
-    .gray-text{
+    .wbl-text{
+        font-size: 22px;
+    }
+
+    .info-text{
         font-size: 12px;
     }
 
@@ -271,4 +364,21 @@ button.rounded {
     .ranking-box{
         padding: 12px 30px 12px 20px;
     }
+
+    .song-static > div {
+        flex-basis: 33%;
+    }
+
+    .mobile-display-cover {
+        display: block;
+    }
+
+    .hidden-on-mobile {
+        display: none;
+    }
+
+    .song-info {
+        margin: 30px 0px;
+    }
+
 }

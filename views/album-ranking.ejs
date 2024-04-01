@@ -3,7 +3,7 @@
 <main>
 
     <div class="main">
-        <h1>Album Ranking</h1>
+        <h1 class="chart-title">Album Ranking</h1>
 
         <!-- 選單 -->
         <div class="chart-menu">                        
@@ -47,8 +47,8 @@
                     <% } %>
                     <img src="/album-covers/<%= albumChartData.album_name.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
                     <div class="text-overflow">
-                        <h2 class="text-overflow"><%= albumChartData.album_name %></h2> <!-- 歌曲名 -->
-                        <p class="gray-text text-overflow">some info</p> <!-- 專輯名 -->
+                        <p class="text-overflow wb-text"><%= albumChartData.album_name %></p> <!-- 歌曲名 -->
+                        <p class="gray-text info-text text-overflow">some info</p> <!-- 專輯名 -->
                     </div>
                 </div>
                 <div>

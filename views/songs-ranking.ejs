@@ -3,16 +3,16 @@
 <main>
 
     <div class="main">
-        <h1>Songs Ranking</h1>
+        <h1 class="chart-title">Songs Ranking</h1>
 
         <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
         <div class="chart-menu">
             <% for (let dates of allDates) {%>               
                 <button class="rounded">
-                    <a href="/songs-ranking/<%= dates.id %>"><%= dates.date %></a> 
+                    <a href="/songs-ranking/date/<%= dates.id %>"><%= dates.date %></a> 
                 </button>
             <% } %> 
-        </div>
+        </div> 
         
         <!-- 排名的日期與資訊 -->
             <div class="ranking-header">
@@ -39,11 +39,11 @@
 
         <!-- 排名，用迴圈從資料庫中讀取資料 -->
         <% for (let songChartData of chartData) { %> 
-            <div class="ranking-box">
+            <div class="ranking-box" onclick="window.location='/songs-ranking/song/<%= songChartData.id %>'">
                 <div>
                     <span class="ranking-number" <% if ( parseInt(songChartData.currentRanking) >= 100 ) { %> style="font-size: 20px" <% } %>>#<%= songChartData.currentRanking %></span> <!-- 當前排名 -->
                     <% if (songChartData.difference !== "" && songChartData.difference !== 0 && !isNaN(songChartData.difference)) { %>
-                        <div class="rank-difference">
+                        <div class="rank-difference"> 
                             <img class="icon" src="/icons/<%= songChartData.difference > 0 ? 'up' : 'down' %>.svg" alt="arrow icon" >
                             <p class="chart-info-hidden"><%= Math.abs(songChartData.difference) %></p>
                         </div> <!-- 排名變化 -->
@@ -53,10 +53,10 @@
                             <p><%= songChartData.lastRanking !== "" ? Math.abs(songChartData.difference) : "" %></p>
                         </div> <!-- 排名變化 -->
                     <% } %>
-                    <img src="/album-covers/<%= songChartData.albumName.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <img src="/album-covers/<%= songChartData.songName === "I Heart?" ? "beautiful eyes" : songChartData.albumName === "Single" ? songChartData.songName.toLowerCase() : songChartData.albumName.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
                     <div class="text-overflow">
-                        <h2 class="text-overflow"><%= songChartData.songName %></h2> <!-- 歌曲名 -->
-                        <p class="gray-text text-overflow"><%= songChartData.albumName %></p> <!-- 專輯名 -->
+                        <p class="text-overflow wb-text"><%= songChartData.songName %></p> <!-- 歌曲名 -->
+                        <p class="gray-text info-text text-overflow"><%= songChartData.albumName %></p> <!-- 專輯名 -->
                     </div>
                 </div>
                 <div>

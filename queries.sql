@@ -86,7 +86,7 @@ SELECT
     songs.song_name, 
     albums.album_name, 
     AVG(rankings.ranking) AS average_ranking,
-    COUNT(rankings.ranking <= 10) AS times_in_top_ten,
+    COUNT(CASE WHEN rankings.ranking <= 10 THEN 1 ELSE NULL END) AS times_in_top_ten,
     (SELECT avr_ranking FROM average_ranking_without_current WHERE song_name = songs.song_name) AS last_average_ranking,
     (SELECT ranking AS peak FROM rankedSongs WHERE rn = 1 AND song_name = songs.song_name) AS peak
 FROM songs
@@ -146,3 +146,38 @@ SELECT
 FROM album_chart
 JOIN last_album_chart ON last_album_chart.song_name = album_chart.song_name
 GROUP BY album_chart.album_name
+
+--用於歌曲資訊頁面與歌曲平均排名頁面，獲得全部歌曲的前十次數排名、進步退步總幅度最大排名等資料--
+WITH rankedSongs AS (
+    SELECT 
+		song_id,
+        song_name,
+		album_name,
+        ranking,
+		date_id,
+        ROW_NUMBER() OVER (PARTITION BY songs.id ORDER BY ranking ASC) AS peakrn,
+		ROW_NUMBER() OVER (PARTITION BY songs.id ORDER BY ranking DESC) AS worstrn,
+		LEAD(ranking) OVER (PARTITION BY songs.id ORDER BY date_id) AS next_ranking
+    FROM 
+        songs
+    JOIN 
+        rankings ON songs.id = song_id 
+	JOIN albums ON album_id = albums.id
+)
+
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY AVG(rankings.ranking) ASC) AS ranking,
+    songs.song_name, 
+	rankedSongs.album_name,
+    AVG(rankings.ranking) AS average_ranking,
+    COUNT(CASE WHEN rankings.ranking <= 10 THEN 1 ELSE NULL END) AS times_in_top_ten,
+    (SELECT ranking FROM rankedSongs WHERE peakrn = 1 AND song_name = songs.song_name) AS peak,
+	(SELECT ranking FROM rankedSongs WHERE worstrn = 1 AND song_name = songs.song_name) AS worst,
+	SUM(ABS(next_ranking - rankings.ranking)) AS total_score_difference,
+    RANK () OVER (ORDER BY (COUNT(CASE WHEN rankings.ranking <= 10 THEN 1 ELSE NULL END)) DESC) AS top_ten_award,
+	RANK () OVER (ORDER BY CASE WHEN SUM(ABS(next_ranking - rankings.ranking)) IS NOT NULL THEN SUM(ABS(next_ranking - rankings.ranking)) ELSE 0 END DESC) AS most_difference_award
+FROM rankings
+JOIN rankedSongs ON rankedSongs.song_id = rankings.song_id AND rankedSongs.date_id = rankings.date_id
+JOIN songs ON songs.id = rankings.song_id
+GROUP BY songs.id, songs.song_name, rankedSongs.album_name
+ORDER BY average_ranking;

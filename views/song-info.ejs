@@ -1,0 +1,143 @@
+<%- include( "partials/header.ejs" ) %>
+
+<main class="song-info-page" style="background-image: linear-gradient(to bottom, #060606b7 0% , #060606e1 10% , #191919 45%, #191919 100%), url('/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp')">
+
+
+    <div class="main">
+        <div class="mobile-display-cover">
+            <img src="/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp" alt="album cover">
+        </div>
+
+        <div class="song-info">
+            <img src="/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp" alt="album cover" class="hidden-on-mobile">
+            <div>
+                <h1><%= statics.song_name %></h1>
+                <p class="light-gray-text"><%= statics.album_name %></p>
+                <button><img class="icon" src="/icons/info.svg" alt="award-icon"></button>
+            </div>
+        </div>
+
+        <div class="song-static">
+            <div>
+                <p class="wbl-text"><%= statics.ranking %></p>
+                <p class="gray-text">all-time ranking</p>
+            </div>
+            <div>
+                <p class="wbl-text"><%= statics.peak %></p>
+                <p class="gray-text">peak position</p>
+            </div>
+            <div>
+                <p class="wbl-text"><%= statics.worst %></p>
+                <p class="gray-text">worst position</p>
+            </div>
+            <div>
+                <p class="wbl-text"><%= statics.times_in_top_ten %></p>
+                <p class="gray-text">times in top ten</p>
+            </div>
+            <div>
+                <p class="wbl-text"><%= statics.total_score_difference %></p>
+                <p class="gray-text">chart run</p>
+            </div>
+            <div>
+                <p class="wbl-text">
+                    <% if ( parseInt(statics.top_ten_award) <= 3 ) { %>
+                        <img class="icon" src="/icons/top-ten-award.svg" alt="award-icon">
+                    <% } if ( parseInt(statics.most_difference_award) <= 3 ) { %>
+                        <img class="icon" src="/icons/unstable-award.svg" alt="award-icon"> 
+                    <% } if ( parseInt(statics.most_stable_award) <= 3 ) { %>
+                        <img class="icon" src="/icons/stable-award.svg" alt="award-icon">
+                    <% } if (parseInt(statics.top_ten_award) >= 3 && parseInt(statics.most_difference_award) >= 3 && parseInt(statics.most_stable_award) >= 3) { %>
+                        No Award
+                    <% } %>
+                </p>
+                <p class="gray-text">award</p>
+            </div>
+            <div>
+                <p class="wbl-text">March 26, 2024</p>
+                <p class="gray-text">realease date</p>
+            </div>
+        </div> 
+
+        <!-- 排名紀錄圖表 -->
+        <h2>Charts</h2>
+        <canvas id="song-line-chart"></canvas>
+
+        <!-- 排名歷史紀錄 -->
+        <h2>History</h2>
+        <% for (let historyData of history) { %>
+            <div class="ranking-box">
+                <div>
+                    <span class="ranking-number">#<%= historyData.ranking %></span> <!-- 排名紀錄 -->
+                    <img src="/album-covers/<%= statics.album_name %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <div class="text-overflow">
+                        <p class="text-overflow wb-text"><%= historyData.date %></h2> <!-- 日期 -->
+                        <p class="gray-text info-text text-overflow"><%= historyData.info %></p> 
+                    </div>
+                </div>
+                <div>
+                    <button class="info-button">
+                        <img class="icon" src="/icons/info.svg" alt="info-icon">
+                    </button> <!-- 資訊按鈕 -->
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById("song-line-chart").getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, "<%= albumColor %>66");
+            gradient.addColorStop(0.4, "<%= albumColor %>33");   
+            gradient.addColorStop(0.8, "<%= albumColor %>1A");
+            gradient.addColorStop(1, "<%= albumColor %>00");
+                
+        new Chart(ctx, {
+            type: 'line',
+            data: {        
+                labels: <%- JSON.stringify(dateData); %>,
+                datasets: [{
+                backgroundColor: gradient,
+                label: 'ranking',
+                pointBackgroundColor: "<%= albumColor %>",
+                data: <%- JSON.stringify(rankingData); %>,
+                borderWidth: 1.5,
+                borderColor: "<%= albumColor %>",
+                fill: 'start'
+            }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        reverse: true,
+                        max: <%= maxNumber %>,
+                        ticks: {
+                                stepSize: ( <%= maxNumber %> / 5)
+                            },
+                        grid: {
+                            color: '#222222'
+                        },
+                        border: {
+                            color: '#353535'
+                        }
+                    },
+                    x: {
+                        border: {
+                            color: '#353535'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+     
+
+</main>
