@@ -14,7 +14,7 @@
                 <a href="">Fearless</a> 
             </button>     
         </div>
-        
+         
         <!-- 小標題 -->
             <div class="ranking-header">
                 <div>
@@ -23,8 +23,8 @@
                 </div>
                 <div>
                     <div>
-                        <p class="chart-info-hidden">peak</p> <!-- 最高排名 -->
-                        <p class="chart-info-hidden">points</p> <!-- 排名前十次數 -->                       
+                        <p class="chart-info-hidden">average</p> <!-- 平均排名 -->
+                        <p class="chart-info-hidden">points</p> <!-- 點數 -->                       
                     </div>                   
                 </div>
             </div>
@@ -32,7 +32,7 @@
         
         <!-- 排名，用迴圈從資料庫中讀取資料 -->
         <% for (let albumChartData of chartData) { %>
-            <div class="ranking-box">
+            <div class="ranking-box" onclick="window.location='/albums-ranking/<%= albumChartData.id %>'">
                 <div>
                     <span class="ranking-number">#<%= albumChartData.ranking %></span> <!-- 當前排名 -->
                     <% if (albumChartData.total_last_points !== null) { %>

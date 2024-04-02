@@ -15,9 +15,10 @@ main {
     display: flex;
     justify-content: center;
     flex: 1; /* 主內容佔滿剩餘空間 */
-    background-color: #191919;
+    background-color: #1b1b1b;
     padding: 80px 100px;
     color: #fff;
+    margin-left: 310px;
 }
 
 .main {
@@ -25,11 +26,32 @@ main {
     max-width: 1000px;
 }
 
+.sidebar {
+    min-width: 300px; /* 側邊欄寬度 */
+    background-color: #111111; /* 側邊欄背景色 */
+    height: 100%;
+    padding: 80px 5px;
+    position: fixed;
+}
+
+.sidebar a {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 15px;
+}
+
+.sidebar a:hover {
+    background-color: #242424;
+}
+
 img {
     max-width: 100%;
     max-height: 100%;
 }
 
+/* 字 */
 h1 {
     font-weight: 700;
     font-size: 30px;
@@ -43,6 +65,12 @@ h2 {
 
 h3{
     font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+p{
+    font-weight: 400;
     font-size: 16px;
 }
 
@@ -54,11 +82,6 @@ h3{
 .wbl-text {
     font-size: 24px;
     font-weight: 500;
-}
-
-p{
-    font-weight: 600;
-    font-size: 16px;
 }
 
 a {
@@ -73,7 +96,11 @@ a {
 
 .light-gray-text{
     font-weight: 400;
-    color: #8e8e8e;
+    color: #737373;
+}
+
+.thin-text {
+    font-weight: 300;
 }
 
 button {
@@ -82,12 +109,6 @@ button {
     color: inherit;
     font-size: 14px;
     font-weight: 400; 
-}
-  
-.sidebar {
-    min-width: 150px; /* 側邊欄寬度 */
-    background-color: #111111; /* 側邊欄背景色 */
-    padding: 80px 50px;
 }
 
 .sidebar > ul {
@@ -103,13 +124,18 @@ button.rounded {
 }
 
 .icon {
-    width: 24px;
+    width: 22px;
 }
+
 
 .chart-menu {
     display: flex;
     gap: 5px;
     margin-bottom: 40px;
+}
+
+.btm-margin {
+    margin-bottom: 80px;
 }
 
  /* 排名相關的 */
@@ -126,6 +152,10 @@ button.rounded {
     padding: 12px 45px 12px 30px;
     border-radius: 10px;
     margin-bottom: 5px;
+}
+
+.ranking-box:hover {
+    background-color: #171717;
 }
 
 .ranking-number {
@@ -163,6 +193,11 @@ button.rounded {
     justify-content: center;
     align-items: center;
     gap: 5px
+}
+
+.chart-award-album-info-page {
+    justify-content: flex-end;
+    gap: 15px;
 }
 
 .ranking-cover {
@@ -243,16 +278,15 @@ button.rounded {
 .song-info {
     display: flex;
     align-items: center;
-    height: 200px;
+    height: 180px;
     gap: 30px; 
     margin-bottom: 50px;
     flex-shrink: 1;
 }
 
-.song-info p {
+.medium-text {
     font-size: 22px;
 }
-
 
 .song-info > div > button {
     margin-top: 10px;
@@ -260,10 +294,8 @@ button.rounded {
 
 .song-static {
     display: flex;
-    row-gap: 40px; 
-    flex-wrap: wrap;
-    margin-bottom: 80px;
-    flex-shrink: 1;
+    gap: 15px; 
+    flex: 1;
     justify-content: space-between;
 }
 
@@ -271,25 +303,61 @@ button.rounded {
     display: flex;
     flex-direction: column;
     flex-basis: 25%;
-}
-
-.song-static > div:last-child {
     flex-grow: 1;
 }
 
+.song-static-bbk > div {
+    padding: 25px;
+    background-color: #111111;
+    border-radius: 15px;
+}
+
 #song-line-chart {
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    margin-left: -20px;
 }
 
 .mobile-display-cover {
     display: none;
 }
 
+/* 條列式數據 */
+.list-statics-parent {
+    display:flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.list-statics-parent > .list-statics:first-child {
+    flex-basis: 35%;
+}
+
+.list-statics-parent > .list-statics:last-child {
+    flex-basis: 50%;
+}
+
+.list-statics {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.list-statics div {
+    display: flex;
+    gap: 10px;
+}
+
+.list-statics > div {
+    justify-content: space-between;
+}
 
 /* RWD */
 @media screen and (max-width: 1023px) {
     main {
         padding: 80px 0px;
+        margin-left: 0px;
     }
 
     .main{
@@ -365,10 +433,6 @@ button.rounded {
         padding: 12px 30px 12px 20px;
     }
 
-    .song-static > div {
-        flex-basis: 33%;
-    }
-
     .mobile-display-cover {
         display: block;
     }
@@ -379,6 +443,30 @@ button.rounded {
 
     .song-info {
         margin: 30px 0px;
+    }
+
+    .song-static {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .song-static-2 > div {
+        padding: 25px;
+        background-color: #111111;
+        border-radius: 15px;
+        flex-basis: 30%;
+    }
+
+    .list-statics-parent {
+        flex-wrap: wrap;
+    }
+
+    .list-statics-parent > .list-statics:first-child {
+        flex-basis: 100%;
+    }
+    
+    .list-statics-parent > .list-statics:last-child {
+        flex-basis: 100%;
     }
 
 }

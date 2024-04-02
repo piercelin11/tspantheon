@@ -1,6 +1,6 @@
 <%- include( "partials/header.ejs" ) %>
 
-<main class="song-info-page" style="background-image: linear-gradient(to bottom, #060606b7 0% , #060606e1 10% , #191919 45%, #191919 100%), url('/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp')">
+<main class="song-info-page" style="background-image: linear-gradient(to bottom, #040404b7 0vw , #060606e1 10vw , #1b1b1b 60vw, #1b1b1b 90vw), url('/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp')">
 
 
     <div class="main">
@@ -12,41 +12,25 @@
             <img src="/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp" alt="album cover" class="hidden-on-mobile">
             <div>
                 <h1><%= statics.song_name %></h1>
-                <p class="light-gray-text"><%= statics.album_name %></p>
+                <p class="light-gray-text medium-text"><%= statics.album_name %></p>
                 <button><img class="icon" src="/icons/info.svg" alt="award-icon"></button>
             </div>
         </div>
 
-        <div class="song-static">
+        <div class="song-static btm-margin">
             <div>
-                <p class="wbl-text"><%= statics.ranking %></p>
+                <p class="wbl-text">#<%= statics.ranking %></p>
                 <p class="gray-text">all-time ranking</p>
-            </div>
-            <div>
-                <p class="wbl-text"><%= statics.peak %></p>
-                <p class="gray-text">peak position</p>
-            </div>
-            <div>
-                <p class="wbl-text"><%= statics.worst %></p>
-                <p class="gray-text">worst position</p>
-            </div>
-            <div>
-                <p class="wbl-text"><%= statics.times_in_top_ten %></p>
-                <p class="gray-text">times in top ten</p>
-            </div>
-            <div>
-                <p class="wbl-text"><%= statics.total_score_difference %></p>
-                <p class="gray-text">chart run</p>
             </div>
             <div>
                 <p class="wbl-text">
                     <% if ( parseInt(statics.top_ten_award) <= 3 ) { %>
-                        <img class="icon" src="/icons/top-ten-award.svg" alt="award-icon">
+                        <img class="icon" src="/icons/crown.svg" alt="award-icon">
                     <% } if ( parseInt(statics.most_difference_award) <= 3 ) { %>
-                        <img class="icon" src="/icons/unstable-award.svg" alt="award-icon"> 
+                        <img class="icon" src="/icons/unstable-award.svg" alt="award-icon">
                     <% } if ( parseInt(statics.most_stable_award) <= 3 ) { %>
                         <img class="icon" src="/icons/stable-award.svg" alt="award-icon">
-                    <% } if (parseInt(statics.top_ten_award) >= 3 && parseInt(statics.most_difference_award) >= 3 && parseInt(statics.most_stable_award) >= 3) { %>
+                    <% } if (parseInt(statics.top_ten_award) > 3 && parseInt(statics.most_difference_award) > 3 && parseInt(statics.most_stable_award) > 3) { %>
                         No Award
                     <% } %>
                 </p>
@@ -56,19 +40,40 @@
                 <p class="wbl-text">March 26, 2024</p>
                 <p class="gray-text">realease date</p>
             </div>
+            <div></div>
         </div> 
 
         <!-- 排名紀錄圖表 -->
         <h2>Charts</h2>
         <canvas id="song-line-chart"></canvas>
 
+        <!-- 歌曲排名相關資訊 -->
+        <div class="song-static song-static-bbk btm-margin">
+            <div >
+                <p class="wbl-text" style="color:<%= albumColor %>">#<%= statics.peak %></p>
+                <p class="light-gray-text">peak position</p>
+            </div>
+            <div >
+                <p class="wbl-text" style="color:<%= albumColor %>">#<%= statics.worst %></p>
+                <p class="light-gray-text">worst position</p>
+            </div>
+            <div >
+                <p class="wbl-text" style="color:<%= albumColor %>"><%= statics.times_in_top_ten %></p>
+                <p class="light-gray-text">times in top ten</p>
+            </div>
+            <div >
+                <p class="wbl-text" style="color:<%= albumColor %>"><%= statics.total_score_difference === null ? "Debut" : statics.total_score_difference %></p>
+                <p class="light-gray-text">chart run</p>
+            </div>
+        </div> 
+
         <!-- 排名歷史紀錄 -->
         <h2>History</h2>
-        <% for (let historyData of history) { %>
+        <% for (let historyData of history) { %> 
             <div class="ranking-box">
                 <div>
                     <span class="ranking-number">#<%= historyData.ranking %></span> <!-- 排名紀錄 -->
-                    <img src="/album-covers/<%= statics.album_name %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
+                    <img src="/album-covers/<%= statics.song_name === "I Heart?" ? "beautiful eyes" : statics.album_name === "Single" ? statics.song_name.toLowerCase() : statics.album_name.toLowerCase() %>.webp" alt="Song Cover" class="ranking-cover"> <!-- 單曲封面照片 -->
                     <div class="text-overflow">
                         <p class="text-overflow wb-text"><%= historyData.date %></h2> <!-- 日期 -->
                         <p class="gray-text info-text text-overflow"><%= historyData.info %></p> 

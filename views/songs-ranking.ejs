@@ -7,6 +7,9 @@
 
         <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
         <div class="chart-menu">
+            <button class="rounded">
+                <a href="/songs-ranking">all-time</a> 
+            </button>
             <% for (let dates of allDates) {%>               
                 <button class="rounded">
                     <a href="/songs-ranking/date/<%= dates.id %>"><%= dates.date %></a> 
@@ -61,7 +64,7 @@
                 </div>
                 <div>
                     <p class="chart-info-hidden"><%= locals.isCurrent ? songChartData.peak : "" %></p> <!-- 最高排名 -->
-                    <p class="chart-info-hidden"><%= songChartData.lastRanking %></p> <!-- 上次排名 -->
+                    <p class="chart-info-hidden"><%= isCurrent ? songChartData.lastRanking : "" %></p> <!-- 上次排名 -->
                     <div class="chart-award">
                         <% if ( songChartData.currentRanking ===  songChartData.peak ) { %>
                             <img class="icon" src="/icons/peak.svg" alt="award-icon">

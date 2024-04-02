@@ -6,13 +6,15 @@
         <h1 class="chart-title">Chart of All Time</h1>
 
         <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
-        <div class="chart-menu">                        
+        <div class="chart-menu">
             <button class="rounded">
-                <a href="">Taylor Swift</a> 
-            </button>  
-            <button class="rounded">
-                <a href="">Fearless</a> 
-            </button>     
+                <a href="/songs-ranking">all-time</a> 
+            </button>
+            <% for (let dates of allDates) {%>               
+                <button class="rounded">
+                    <a href="/songs-ranking/date/<%= dates.id %>"><%= dates.date %></a> 
+                </button>
+            <% } %> 
         </div>
         
         <!-- 小標題 -->
@@ -36,7 +38,7 @@
             <div class="ranking-box" onclick="window.location='/songs-ranking/song/<%= songAverageChartData.id %>'">
                 <div> 
                     <span class="ranking-number" <% if ( parseInt(songAverageChartData.ranking) >= 100 ) { %> style="font-size: 20px" <% } %>>#<%= songAverageChartData.ranking %></span> <!-- 當前排名 -->
-                    <% if (songAverageChartData.last_average_ranking !== null) { %>
+                    <% if (songAverageChartData.total_score_difference !== null) { %>
                         <div class="rank-difference">
                             <img class="icon" src="/icons/<%= songAverageChartData.last_average_ranking - songAverageChartData.ranking > 0 ? 'up' : songAverageChartData.last_average_ranking - songAverageChartData.ranking < 0 ? 'down' : 'right' %>.svg" alt="arrow icon" >
                             <p class="chart-info-hidden"><%= Math.abs(songAverageChartData.last_average_ranking - songAverageChartData.ranking) %></p>
@@ -57,10 +59,10 @@
                     <p class="chart-info-hidden"><%= songAverageChartData.times_in_top_ten %></p> <!-- 上次排名 -->
                     <div class="chart-award">
                         <% if ( parseInt(songAverageChartData.top_ten_award) <= 3 ) { %>
-                            <img class="icon" src="/icons/top-ten-award.svg" alt="award-icon">
+                            <img class="icon" src="/icons/crown.svg" alt="award-icon">
                         <% } if ( parseInt(songAverageChartData.most_difference_award) <= 3 ) { %>
                             <img class="icon" src="/icons/unstable-award.svg" alt="award-icon"> 
-                        <% } else if ( parseInt(songAverageChartData.most_stable_award) <= 3 ) { %>
+                        <% } else if ( parseInt(songAverageChartData.most_stable_award) <= 3 && songAverageChartData.total_score_difference !== null) { %>
                             <img class="icon" src="/icons/stable-award.svg" alt="award-icon">
                         <% } %>
                     </div>
