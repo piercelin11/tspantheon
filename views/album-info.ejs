@@ -39,7 +39,7 @@
 
         <!-- 專輯排名相關資訊 -->
         <div class="list-statics-parent btm-margin">
-            <div class="list-statics" style="background-color: #111111">
+            <div class="list-statics dark-bk">
                 <div><h3 style="color:<%= albumInfo.album_color %>">A W A R D S</h3></div>
                 <div>
                     <div class="icon-label">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="list-statics" style="background-color: #111111">
+            <div class="list-statics dark-bk">
                 <div><h3 style="color:<%= albumInfo.album_color %>">S T A T I C S</h3></div>
                 <div>
                     <div class="icon-label">
@@ -170,17 +170,17 @@
                 labels: <%- JSON.stringify(dateData); %>,
                 datasets: [{
                 backgroundColor: gradient,
-                label: 'songs in top #50',
+                label: 'songs in top 25%',
                 pointBackgroundColor: "<%= albumInfo.album_color %>4D",
-                data: <%- JSON.stringify(topFiftyData); %>,
+                data: <%- JSON.stringify(topTwentyFiveData); %>,
                 borderWidth: 1.5,
                 borderColor: "<%= albumInfo.album_color %>4D",
                 fill: "start"
                 }, {
                 backgroundColor: gradient,
-                label: 'songs in top #100',
+                label: 'songs in top 50%',
                 pointBackgroundColor: "<%= albumInfo.album_color %>",
-                data: <%- JSON.stringify(topHundredData); %>,
+                data: <%- JSON.stringify(topFiftyData); %>,
                 borderWidth: 1.5,
                 borderColor: "<%= albumInfo.album_color %>",
                 fill: "start"
@@ -214,3 +214,6 @@
      
 
 </main>
+
+</body>
+</html> 

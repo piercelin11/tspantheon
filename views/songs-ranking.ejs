@@ -3,7 +3,7 @@
 <main>
 
     <div class="main">
-        <h1 class="chart-title">Songs Ranking</h1>
+        <h1 class="chart-title">Charts on <%= currentDate.longDate %></h1>
 
         <!-- 日期選單，與歌曲排名表格和日期表格做互動 -->
         <div class="chart-menu">
@@ -12,19 +12,44 @@
             </button>
             <% for (let dates of allDates) {%>               
                 <button class="rounded">
-                    <a href="/songs-ranking/date/<%= dates.id %>"><%= dates.date %></a> 
+                    <a href="/songs-ranking/date/<%= dates.id %>"><%= dates.numericDate %></a> 
                 </button>
             <% } %> 
         </div> 
+        
+        <!-- 數據圖表 -->
+        <div class="list-statics-parent btm-margin">
+            <div class="list-statics dark-bk">
+                <% for (let album of albumRanking) {%>
+                <div>
+                    <div class="icon-label">
+                        <p class="list-ranking">#<%= album.ranking %></p>
+                        <div>
+                            <p class="big-dot" style="color: <%= album.album_color %>">●</p>
+                            <p class="thin-text"><%= album.album_name %></p>
+                        </div>
+                    </div>
+                    <p class="light-gray-text"><%= album.total_points %> points</p>
+                </div>
+                <% } %>
+                
+            </div>
+
+            <!-- 圓餅圖 -->
+            <div class="dark-bk polar-chart-statics">
+                <canvas id="song-polar-chart"></canvas>
+            </div>
+        
+        </div>
         
         <!-- 排名的日期與資訊 -->
             <div class="ranking-header">
                 <div>
                     <% if (locals.currentDate) {%>
-                        <p><%= currentDate.date %></p>
+                        <p><%= currentDate.numericDate %></p>
                         <p class="gray-text text-overflow"><%= currentDate.info %></p>
                     <% } else { %>
-                        <p><%= allDates[0].date %></p>
+                        <p><%= allDates[0].numericDate %></p>
                         <p class="gray-text text-overflow"><%= allDates[0].info %></p>
                     <% } %>
                 </div>
@@ -84,6 +109,55 @@
     </div>
 
 </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById("song-polar-chart").getContext("2d");
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: <%- JSON.stringify(polarChartsAlbumName); %>,
+                datasets: [{
+                    label: 'Songs in Top 50%',
+                    data: <%- JSON.stringify(polarChartsData); %>,
+                    backgroundColor: <%- JSON.stringify(polarChartsColor); %>,
+                    borderColor: '#111111',
+                    borderWidth: 2.5
+                }],
+                
+            },
+            options: {
+                
+                plugins: {
+                    
+                    legend: { 
+                        position: 'bottom',
+                        labels: {
+                            color: '#737373',
+                            font: {
+                                size: 12
+                            },
+                            padding: 15
+                        }
+                    }
+                    
+                },
+                scales: {
+                    r: {
+                        grid: {
+                            color: '#252525'
+                        },
+                        ticks: {
+                            color: '#505050',
+                            backdropColor: '#111111'
+                        }
+                    }
+                }   
+            }
+        });
+
+    </script>
 
 </body>
 </html> 

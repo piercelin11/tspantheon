@@ -1,0 +1,44 @@
+<%- include( "partials/header.ejs" ) %>
+
+<main>
+
+    <div class="main">
+
+        <table id="mainTable"  font size="16" style="line-height:35px;">
+            <tbody>
+                <tr>
+                    <td id="battleNumber" colspan="3" style="padding-bottom: 20px; text-align:center;"><b>battle #1<br>0% sorted.</b></td>
+                </tr>
+                <tr>
+                    <td id="leftField" onclick="if(finishFlag==0) sortList(-1);" rowspan="2" style="text-align:center;"></td>
+                    <td class="middleField" onclick="if(finishFlag==0) sortList(0);" style="text-align:center;">
+                        I like both
+                    </td>
+                    <td id="rightField" onclick="if(finishFlag==0) sortList(1);" rowspan="2" style="text-align:center;"></td>
+                </tr>
+                <tr>
+                    <td class="middleField" onclick="if(finishFlag==0) sortList(0);" style="text-align:center;">
+                        no opinion
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br><br>
+
+        <div id="resultField" style="text-align: center;">
+            <br>
+        </div>
+
+        <form id="myForm">
+            <input type="text" placeholder="event" id="event" name="event" required><br>
+            <button type="submit" class="btn rounded">Submit</button>
+        </form>
+
+    </div>
+
+</main>
+</body>
+
+<script src="/sorter.js" type="text/javascript"></script>
+</html>

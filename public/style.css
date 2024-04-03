@@ -103,6 +103,12 @@ a {
     font-weight: 300;
 }
 
+.big-dot {
+    font-size: 26px;
+    margin-top: -3px;
+    margin-right: -6px;
+}
+
 button {
     border: none;
     background-color: transparent;
@@ -127,6 +133,10 @@ button.rounded {
     width: 22px;
 }
 
+.icon-label {
+    display: flex;
+    align-items: center;
+}
 
 .chart-menu {
     display: flex;
@@ -135,7 +145,12 @@ button.rounded {
 }
 
 .btm-margin {
-    margin-bottom: 80px;
+    margin-bottom: 50px;
+}
+
+.dark-bk {
+    background-color: #111111;
+    border-radius: 15px;
 }
 
  /* 排名相關的 */
@@ -268,6 +283,17 @@ button.rounded {
     display: none;
 }
 
+.polar-chart-statics {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.polar-chart-statics > div {
+    flex: 1;
+}
+
+
 /* 歌曲資訊頁面 */
 .song-info-page {
     background-repeat: no-repeat;
@@ -328,29 +354,36 @@ button.rounded {
     margin-top: 20px;
 }
 
-.list-statics-parent > .list-statics:first-child {
+.list-statics-parent > div:first-child {
     flex-basis: 35%;
 }
 
-.list-statics-parent > .list-statics:last-child {
+.list-statics-parent > div:last-child {
     flex-basis: 50%;
+    flex-grow: 1;
 }
 
 .list-statics {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 40px;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 30px;
     border-radius: 15px;
 }
 
 .list-statics div {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
 .list-statics > div {
     justify-content: space-between;
+}
+
+.list-ranking {
+    width: 25px
 }
 
 /* RWD */
@@ -387,6 +420,18 @@ button.rounded {
 
     .ranking-number {
         min-width: 50px;
+    }
+
+    .list-statics-parent {
+        flex-wrap: wrap;
+    }
+
+    .list-statics-parent > .list-statics:first-child {
+        flex-basis: 100%;
+    }
+    
+    .list-statics-parent > .list-statics:last-child {
+        flex-basis: 100%;
     }
 
 }
@@ -457,16 +502,50 @@ button.rounded {
         flex-basis: 30%;
     }
 
-    .list-statics-parent {
-        flex-wrap: wrap;
-    }
-
-    .list-statics-parent > .list-statics:first-child {
-        flex-basis: 100%;
-    }
-    
-    .list-statics-parent > .list-statics:last-child {
-        flex-basis: 100%;
-    }
-
 }
+
+
+/* SORTER CSS TEMPORARILY */
+#mainTable {
+    font-size: 15px;
+    font-family: 'Arial';
+    text-align: center;
+    vertical-align: middle;
+    width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 7px 7px;
+}
+
+#leftField {
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
+    line-height: 20px;
+    height: 150px;
+    border: 1px solid #000;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#rightField {
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
+    line-height: 20px;
+    height: 150px;
+    border: 1px solid #000;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.middleField {
+    width: 120px;
+    max-width: 120px;
+    min-width: 120px;
+    height: 70px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
