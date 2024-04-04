@@ -151,7 +151,7 @@ function sortList(flag) {
     }
 
     if (cmp1 < 0) {
-        var str = "battle #" + (numQuestion - 1) + "<br>" + Math.floor(finishSize * 100 / totalSize) + "% sorted.";
+        var str = Math.floor(finishSize * 100 / totalSize) + "% sorted.";
         document.getElementById("battleNumber").innerHTML = str;
         showResult();
         finishFlag = 1;
@@ -198,7 +198,7 @@ function toNameFace(n) {
 
 //將歌名顯示於比較兩首歌曲的表格中
 function showImage() {
-    var str0 = "battle #" + numQuestion + "<br>" + Math.floor(finishSize * 100 / totalSize) + "% sorted.";
+    var str0 = Math.floor(finishSize * 100 / totalSize) + "% sorted.";
     var str1 = "" + toNameFace(lstMember[cmp1][head1]);
     var str2 = "" + toNameFace(lstMember[cmp2][head2]);
 
@@ -209,7 +209,7 @@ function showImage() {
     numQuestion++;
 }
 
-document.querySelector(".btn").addEventListener("click", () => {console.log(array);});
+document.querySelector(".btn2").addEventListener("click", () => {console.log(array);});
 
 initList();
 showImage();

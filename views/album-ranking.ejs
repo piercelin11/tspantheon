@@ -7,14 +7,19 @@
 
         <!-- 選單 -->
         <div class="chart-menu">                        
-            <button class="rounded">
+            <button class="rounded" id="testbtn">
                 <a href="">Taylor Swift</a> 
             </button>  
             <button class="rounded">
                 <a href="">Fearless</a> 
             </button>     
         </div>
-         
+
+        <!-- 排名紀錄圖表 -->
+        <h3>songs in top 50%</h3>
+        <div class="dark-bk mid-padding btm-margin">
+            <canvas id="album-line-chart"></canvas>
+        </div>
         <!-- 小標題 -->
             <div class="ranking-header">
                 <div>
@@ -66,5 +71,95 @@
 
 </main>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const lineChart = <%- JSON.stringify(lineChartData); %>; // 將後端傳遞的 lineChartData 資料轉換為 JavaScript 物件
+        const ctx = document.getElementById("album-line-chart").getContext("2d");
+        const datasets = []
+
+        lineChart.forEach( (item) => {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, `${item.albumColor}1A`);
+            gradient.addColorStop(0.4, `${item.albumColor}1A`);   
+            gradient.addColorStop(0.8, `${item.albumColor}00`);
+            gradient.addColorStop(1, `${item.albumColor}00`); 
+        
+            const data = {
+            backgroundColor: gradient,
+            label: item.albumName,
+            pointBackgroundColor: item.albumColor,
+            data: item.pr50Data,
+            borderWidth: 2,
+            borderColor: item.albumColor,
+            fill: 'start'
+            };
+
+            datasets.push(data);
+        });
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {        
+                labels: <%- JSON.stringify(dateData); %>,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#222222'
+                        },
+                        border: {
+                            color: '#353535'
+                        }
+                    },
+                    x: {
+                        border: {
+                            color: '#353535'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#737373',
+                            font: {
+                                size: 12
+                            },
+                            padding: 20,
+                        },
+                        onClick: function(e, legendItem) {
+                            var index = legendItem.datasetIndex;
+                            var ci = this.chart;
+                            var alreadyHidden = (ci.getDatasetMeta(index).hidden === null) ? false : ci.getDatasetMeta(index).hidden;
+
+                            ci.data.datasets.forEach(function(e, i) {
+                            var meta = ci.getDatasetMeta(i);
+
+                            if (i !== index) {
+                                if (!alreadyHidden) {
+                                meta.hidden = meta.hidden === null ? !meta.hidden : null;
+                                } else if (meta.hidden === null) {
+                                meta.hidden = true;
+                                }
+                            } else if (i === index) {
+                                meta.hidden = null;
+                            }
+                            });
+
+                            ci.update();
+                        },
+                    }
+                }
+            }
+        });
+        
+        
+        document.querySelector("#testbtn").addEventListener("click", () => {alert(datasets[0].pr50Data)})
+    </script>
+     
 </body>
 </html> 

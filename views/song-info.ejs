@@ -27,12 +27,12 @@
                     <% if ( parseInt(statics.peak) === 1 ) { %>
                         <img class="icon" src="/icons/crown-1.svg" alt="award-icon">
                     <% } if ( parseInt(statics.top_ten_award) <= 5 ) { %>
-                        <img class="icon" src="/icons/crown.svg" alt="award-icon">
+                        <img class="icon" src="/icons/crown-10.svg" alt="award-icon">
                     <% } if ( parseInt(statics.most_difference_award) <= 10 ) { %>
                         <img class="icon" src="/icons/soaring-award.svg" alt="award-icon">
                     <% } if ( parseInt(statics.most_stable_award) <= 10 ) { %>
                         <img class="icon" src="/icons/anchored-award.svg" alt="award-icon">
-                    <% } if ( parseInt(statics.gap_award) <= 3 ) { %>
+                    <% } if ( parseInt(statics.gap_award) <= 10 ) { %>
                         <img class="icon" src="/icons/gap-award.svg" alt="award-icon">
                     <% } if (parseInt(statics.peak) !== 1 && parseInt(statics.top_ten_award) > 5 && parseInt(statics.most_difference_award) > 10 && parseInt(statics.most_stable_award) > 10 && parseInt(statics.gap_award) > 10) { %>
                         No Award
@@ -107,6 +107,7 @@
             type: 'line',
             data: {        
                 labels: <%- JSON.stringify(dateData); %>,
+                
                 datasets: [{
                 backgroundColor: gradient,
                 label: 'ranking',

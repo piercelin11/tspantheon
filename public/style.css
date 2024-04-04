@@ -96,7 +96,7 @@ a {
 
 .light-gray-text{
     font-weight: 400;
-    color: #737373;
+    color: #a3a3a3;
 }
 
 .thin-text {
@@ -142,15 +142,30 @@ button.rounded {
     display: flex;
     gap: 5px;
     margin-bottom: 40px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 20px;
 }
 
 .btm-margin {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+}
+
+.btm-s-margin {
+    margin-bottom: 30px;
 }
 
 .dark-bk {
     background-color: #111111;
     border-radius: 15px;
+}
+
+.mid-padding {
+    padding: 30px;
+}
+
+.hide {
+    display: none;
 }
 
  /* 排名相關的 */
@@ -386,6 +401,89 @@ button.rounded {
     width: 25px
 }
 
+/* Sorter 排名遊戲 */
+.sorter-container {
+    display: flex;
+    width: 100%;
+    gap: 15px
+}
+
+.sorter-container > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 15px;
+}
+
+.sorter-container > div:nth-child(2) > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.sorter-container button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+}
+
+.sorter-container button:hover {
+    background: #141414;
+}
+
+.sorter-container button > div{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 60px;
+    gap: 5px;
+}
+
+#battleNumber {
+    text-align: center;
+}
+
+#sorterProgress {
+    width: 100%;
+    background-color:#111111;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+  
+#sorterBar {
+    width: 0%;
+    height: 10px;
+    background-color:#454545;
+    border-radius: 10px;
+}
+
+.horizontal-form {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.horizontal-form input {
+    flex: 1;
+    border-radius: 15px;
+    height: 30px;
+}
+
+.horizontal-form button {
+    flex: 0 0 auto;
+    background-color: #525252;
+}
+
+.horizontal-form button:hover {
+    background-color: #fff;
+    color: #111111;
+}
+
 /* RWD */
 @media screen and (max-width: 1023px) {
     main {
@@ -506,7 +604,7 @@ button.rounded {
 
 
 /* SORTER CSS TEMPORARILY */
-#mainTable {
+/* #mainTable {
     font-size: 15px;
     font-family: 'Arial';
     text-align: center;
@@ -547,5 +645,5 @@ button.rounded {
     height: 70px;
     border: 1px solid #000;
     cursor: pointer;
-}
+} */
 
