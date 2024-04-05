@@ -39,6 +39,7 @@
             </button>
             </div>
         </div>
+        <button id="prevButton">previous step</button>
 
         <div id="resultField" class="btm-margin">      
         </div>
@@ -71,6 +72,7 @@ let namMember = [
 "The Outside"
 ];
 
+let history = [];
 let array = [];
 let lstMember = [];
 let parent = [];
@@ -132,6 +134,8 @@ function initList() {
 
 //用來對歌曲列表進行排序的根據 flag 的值，可以決定選擇左邊的歌曲、右邊的歌曲，或者宣告平局。
 function sortList(flag) {
+    recordHistory();
+
     var i;
     if (flag < 0) {
         rec[nrec] = lstMember[cmp1][head1];
@@ -285,6 +289,53 @@ function showImage() {
 
 initList();
 showImage();
+
+document.getElementById("prevButton").addEventListener("click", () => {
+    restorePreviousState();
+});
+
+//紀錄當前變數與陣列資料，用於 sortList 中
+function recordHistory() {
+    var currentState = {
+        cmp1: cmp1,
+        cmp2: cmp2,
+        head1: head1,
+        head2: head2,
+        rec: rec.slice(), // Create a copy of rec array
+        nrec: nrec,
+        equal: equal.slice(), // Create a copy of equal array
+        finishSize: finishSize,
+        finishFlag: finishFlag,
+        lstMember: lstMember.slice(), // Create a copy of lstMember array
+        parent: parent.slice(), // Create a copy of parent array
+        totalSize: totalSize,
+        numQuestion: numQuestion
+    };
+    history.push(currentState);
+}
+
+//將所有變數與陣列資料重回上一步驟的資料
+function restorePreviousState() {
+    if (history.length > 0) {
+        var prevState = history.pop();
+        cmp1 = prevState.cmp1;
+        cmp2 = prevState.cmp2;
+        head1 = prevState.head1;
+        head2 = prevState.head2;
+        rec = prevState.rec;
+        nrec = prevState.nrec;
+        equal = prevState.equal;
+        finishSize = prevState.finishSize;
+        finishFlag = prevState.finishFlag;
+        lstMember = prevState.lstMember.slice(); // Restore lstMember array
+        parent = prevState.parent.slice(); // Restore parent array
+        totalSize = prevState.totalSize;
+        numQuestion = prevState.numQuestion;
+        showImage(); // Update the UI
+    } else {
+        alert("No previous step available.");
+    }
+}
 
 //表單送出後將資料傳進後端
 document.querySelector("#myForm").addEventListener("submit", async (e) => {
